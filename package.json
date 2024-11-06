@@ -1,0 +1,30 @@
+{
+  "name": "projeto-driven-recharge",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev .",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "Gabriel Paranhos",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.8.7",
+    "@types/pg": "^8.11.10",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.13.3",
+    "pg": "^8.13.1"
+  }
+}
