@@ -16,7 +16,7 @@ CREATE TABLE "documents"(
 
 CREATE TABLE "phones"(
   "id" SERIAL PRIMARY KEY NOT NULL,
-  "number" INTEGER UNIQUE NOT NULL,
+  "number" VARCHAR(255) UNIQUE NOT NULL,
   "name" TEXT NOT NULL,
   "description" TEXT NOT NULL,
   "id_carrier" INTEGER REFERENCES "carriers"("id") NOT NULL,
