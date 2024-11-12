@@ -4,14 +4,15 @@ const createDocument = (cpf:string) => {
   return db.query(`
     INSERT INTO documents (cpf)
       VALUES ($1)
-      RETURNING *
+      RETURNING documents.id AS id_document, documents.cpf
   `, [cpf])
 }
 
-const getPhonesByCpf = (cpf:string) => {
+const listPhonesByCpf = (cpf:string) => {
   return db.query(`
-    SELECT documents.id FROM documents
+    SELECT documents.id AS id_document, documents.cpf, phones.*, carriers.name AS carrier FROM documents
 	    JOIN phones ON documents.id = phones.id_document
+      JOIN carriers ON phones.id_carrier = carriers.id
 	    WHERE documents.cpf = $1
   `, [cpf])
 }
@@ -24,14 +25,14 @@ const createPhoneData = (number: string, name: string, description: string, carr
   `, [number, name, description, carrierId, documentId])
 }
 
-const getPhoneByNumber = (number: string) => {
+const listPhoneByNumber = (number: string) => {
   return db.query(`
     SELECT * FROM phones
       WHERE number = $1;
   `, [number])
 }
 
-const getCarrierById = (code: number) => {
+const listCarrierById = (code: number) => {
   return db.query(`
     SELECT * FROM carriers
       WHERE code = $1;
@@ -40,10 +41,10 @@ const getCarrierById = (code: number) => {
 
 const phonesRepository = {
   createDocument,
-  getPhonesByCpf,
+  listPhonesByCpf,
   createPhoneData,
-  getPhoneByNumber,
-  getCarrierById
+  listPhoneByNumber,
+  listCarrierById
 }
 
 export default phonesRepository
