@@ -33,6 +33,13 @@ const listPhoneByNumber = (number: string) => {
   `, [number])
 }
 
+const listPhoneById = (id: number) => {
+  return db.query<phone>(`
+    SELECT * FROM phones
+      WHERE id = $1;
+  `, [id])
+}
+
 const listCarrierById = (code: number) => {
   return db.query<carrier>(`
     SELECT * FROM carriers
@@ -45,6 +52,7 @@ const phonesRepository = {
   listPhonesByCpf,
   createPhone,
   listPhoneByNumber,
+  listPhoneById,
   listCarrierById
 }
 

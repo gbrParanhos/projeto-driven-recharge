@@ -25,5 +25,6 @@ CREATE TABLE "phones"(
 
 CREATE TABLE "recharges"(
   "id" SERIAL PRIMARY KEY NOT NULL,
+  "value" INTEGER NOT NULL,
   "id_phone" INTEGER REFERENCES "phones"("id") NOT NULL
 );

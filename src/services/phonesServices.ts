@@ -22,10 +22,10 @@ export const createPhone = async ({number, carrierCode, name, description, cpf}:
   return result
 }
 
-export const listPhonesByCpf = async (cpf: string) => {
-  const phonesList = await phonesRepository.listPhonesByCpf(cpf)
-  const result = phonesList.rows.map(phone => {
-    const {id_document, cpf, id, id_carrier, ...phoneFormatted} = phone
+export const listPhones = async (cpf: string) => {
+  const {rows} = await phonesRepository.listPhonesByCpf(cpf)
+  const result = rows.map(phone => {
+    const {id_document, cpf, id_carrier, ...phoneFormatted} = phone
     return phoneFormatted
   })
   return result

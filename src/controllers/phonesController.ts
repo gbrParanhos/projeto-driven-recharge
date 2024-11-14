@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { createPhone, listPhonesByCpf } from "../services/phonesServices";
+import { createPhone, listPhones } from "../services/phonesServices";
 
 export const postPhones = async (req: Request, res: Response) => {
-  await createPhone(req.body)
-  res.sendStatus(201);
+  const result = await createPhone(req.body)
+  res.status(201).send(result.rows[0]);
 }
 
 export const getPhonesByCpf = async (req: Request, res: Response) => {
-  const result = await listPhonesByCpf(req.params.document)
+  const result = await listPhones(req.params.document)
   res.status(200).send(result);
 }

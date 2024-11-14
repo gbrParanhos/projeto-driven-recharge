@@ -31,3 +31,11 @@ export type carrier = {
   name: string,
   code: number
 }
+
+export type recharge = {
+  id: number,
+  id_phone: number,
+  value: number
+}
+
+export type rechargeData = Omit<recharge, 'id'>
