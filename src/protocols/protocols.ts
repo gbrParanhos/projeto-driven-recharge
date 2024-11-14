@@ -23,7 +23,8 @@ export type phoneData = Omit<phone, 'id' | 'id_carrier' | 'id_document'> & {
 }
 
 export type completePhone = document & phone & {
-  carrier: string
+  carrier: string,
+  code: number
 }
 
 export type carrier = {

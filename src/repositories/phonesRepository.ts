@@ -11,7 +11,7 @@ const createDocument = (cpf:string) => {
 
 const listPhonesByCpf = (cpf:string) => {
   return db.query<completePhone>(`
-    SELECT documents.cpf, phones.*, carriers.name AS carrier FROM documents
+    SELECT documents.cpf, phones.*, carriers.name AS carrier, carriers.code FROM documents
 	    JOIN phones ON documents.id = phones.id_document
       JOIN carriers ON phones.id_carrier = carriers.id
 	    WHERE documents.cpf = $1
