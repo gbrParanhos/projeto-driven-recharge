@@ -8,17 +8,17 @@ export const createPhone = async ({number, carrierCode, name, description, cpf}:
 
   const carrier = await phonesRepository.listCarrierById(carrierCode);
   if (carrier.rowCount === 0) throw notFoundError('operadora', 'código');
+  const carrierId = carrier.rows[0].id
 
-  let cpfFormatted = cpf.replace(/\D/g, '');
-  let document = await phonesRepository.listPhonesByCpf(cpfFormatted);
-  if (document.rowCount > 2) throw conflictError('3 números')
-  if (document.rowCount === 0) {
-    document = await phonesRepository.createDocument(cpfFormatted);
+  const cpfFormatted = cpf.replace(/\D/g, '');
+  const completePhone = await phonesRepository.listPhonesByCpf(cpfFormatted);
+  let documentId = completePhone.rows[0]?.id_document
+  if (completePhone.rowCount > 2) throw conflictError('3 números')
+  if (completePhone.rowCount === 0) {
+    documentId = (await phonesRepository.createDocument(cpfFormatted)).rows[0].id_document;
   }
     
-  const carrierId: number = carrier.rows[0].id
-  const documentId: number = document.rows[0].id_document
-  const result = phonesRepository.createPhoneData(number, name, description, carrierId, documentId);
+  const result = phonesRepository.createPhone(number, name, description, carrierId, documentId);
   return result
 }
 
